@@ -4,7 +4,7 @@ services:
     nginx:
         image: nginx:1.17.0-alpine
         ports:
-            - '80:80'
+            - '8080:80'
         volumes:
             - bulbulatory/:/var/www/bulbulatory/:nocopy,delegated
             - ./nginx/servers/bulbulatory.conf:/etc/nginx/conf.d/bulbulatory.conf

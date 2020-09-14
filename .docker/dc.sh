@@ -86,7 +86,7 @@ createVolumes() {
 
 setupProject() {
     docker exec -it "$COMPOSE_PROJECT_NAME"_php_1 ash -c "composer install ;
-    bin/magento setup:install --base-url=http://$COMPOSE_PROJECT_NAME.test/ --db-host=$MYSQL_HOST --db-name=$MYSQL_DATABASE --db-user=$MYSQL_USER --db-password=$MYSQL_PASSWORD --backend-frontname=admin --admin-firstname=admin --admin-lastname=admin --admin-email=admin@admin.com --admin-user=$ADMIN_USERNAME --admin-password=$ADMIN_PASSWORD --language=pl_PL --currency=USD --timezone=America/Chicago --use-rewrites=1 ;
+    bin/magento setup:install --base-url=http://$COMPOSE_PROJECT_NAME.test:8080/ --db-host=$MYSQL_HOST --db-name=$MYSQL_DATABASE --db-user=$MYSQL_USER --db-password=$MYSQL_PASSWORD --backend-frontname=admin --admin-firstname=admin --admin-lastname=admin --admin-email=admin@admin.com --admin-user=$ADMIN_USERNAME --admin-password=$ADMIN_PASSWORD --language=pl_PL --currency=USD --timezone=America/Chicago --use-rewrites=1 ;
     php bin/magento setup:di:compile"
 }
 
