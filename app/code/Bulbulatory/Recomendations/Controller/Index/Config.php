@@ -2,24 +2,29 @@
 
 namespace Bulbulatory\Recomendations\Controller\Index;
 
-    class Config extends \Magento\Framework\App\Action\Action
+use Magento\Framework\App\Action\Action;
+use Magento\Framework\App\Action\Context;
+
+class Config extends Action
+{
+    /**
+     * @var \Bulbulatory\Recomendations\Helper\Config
+     */
+    protected $helperData;
+
+    public function __construct(
+        Context $context,
+        \Bulbulatory\Recomendations\Helper\Config $helperData
+    )
     {
-        protected $helperData;
+        $this->helperData = $helperData;
 
-        public function __construct(
-            \Magento\Framework\App\Action\Context $context,
-            \Bulbulatory\Recomendations\Helper\Data $helperData
-        ) {
-            $this->helperData = $helperData;
-
-            return parent::__construct($context);
-        }
-
-        public function execute()
-        {
-            // TODO: Implement execute() method.
-
-            echo $this->helperData->getGeneralConfig('enable');
-            exit();
-        }
+        return parent::__construct($context);
     }
+
+    public function execute()
+    {
+        echo $this->helperData->isEnabled();
+        exit();
+    }
+}
