@@ -3,7 +3,7 @@
     <default>
         <recomendations>
             <general>
-                <enable>1</enable>
+                <enabled>1</enabled>
             </general>
         </recomendations>
     </default>
