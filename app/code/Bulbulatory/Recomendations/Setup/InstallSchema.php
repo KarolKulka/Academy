@@ -69,11 +69,11 @@ class InstallSchema implements InstallSchemaInterface
                                'Creation time of recomendation'
                            )
                            ->addColumn(
-                               'updated_at',
+                               'confirmed_at',
                                Table::TYPE_TIMESTAMP,
                                null,
                                ['nullable' => false],
-                               'Update time of recomendation'
+                               'Confirmation time of the recommendation'
                            )
                            ->addIndex(
                                $setup->getIdxName(
