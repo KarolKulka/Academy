@@ -20,6 +20,8 @@ class InstallSchema implements InstallSchemaInterface
      */
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
+        $setup->startSetup();
+
         if (!$setup->tableExists('recomendations')) {
             /**
              * Create table 'recomendations'
@@ -37,7 +39,7 @@ class InstallSchema implements InstallSchemaInterface
                                'customer_id',
                                Table::TYPE_INTEGER,
                                255,
-                               ['nullable' => false, 'default' => '', 'unsigned' => true],
+                               ['nullable' => false, 'unsigned' => true],
                                'Reference Id'
                            )
                            ->addColumn(
@@ -45,14 +47,14 @@ class InstallSchema implements InstallSchemaInterface
                                Table::TYPE_TEXT,
                                100,
                                ['nullable' => false],
-                               'Email to which was recomendation sent',
+                               'Email to which was recomendation sent'
                            )
                            ->addColumn(
                                'recomendation_hash',
                                Table::TYPE_TEXT,
                                255,
                                ['nullable' => false],
-                               'Unique hash of recomendation',
+                               'Unique hash of recomendation'
                            )
                            ->addColumn(
                                'status',
@@ -85,18 +87,20 @@ class InstallSchema implements InstallSchemaInterface
                                ['type' => AdapterInterface::INDEX_TYPE_UNIQUE]
                            )
                            ->setComment("Recomendations Table")
-            ->addForeignKey(
-                $setup->getFkName(
-                    'recomendations',
-                    'customer_id',
-                    'customer_entity',
-                    'entity_id'),
-                'customer_id',
-                $setup->getTable('customer_entity'),
-                'entity_id'
-            );
+                           ->addForeignKey(
+                               $setup->getFkName(
+                                   'recomendations',
+                                   'customer_id',
+                                   'customer_entity',
+                                   'entity_id'),
+                               'customer_id',
+                               $setup->getTable('customer_entity'),
+                               'entity_id'
+                           );
             $setup->getConnection()->createTable($table);
         }
+
+        $setup->endSetup();
     }
 }
 
